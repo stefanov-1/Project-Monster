@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerStateManager : MonoBehaviour
+{
+    #region States
+    public Idle idleState = new Idle();
+    public Running runningState = new Running();
+    #endregion
+
+    #region Current and previous states
+    [SerializeField] private State currentState;
+    private State previousState;
+    #endregion
+
+    #region Properties
+    public Rigidbody rb { get; private set; }
+    public float speed = 5f;
+    public float jumpForce;
+    public float gravity;
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
+    #endregion 
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    private void OnEnable()
+    {
+
+        currentState = idleState;
+        currentState.EnterState(this);
+        previousState = currentState;
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        currentState = currentState.UpdateState(this);
+        if (previousState != currentState)
+        {
+            previousState.ExitState(this);
+            currentState.EnterState(this);
+            previousState = currentState;
+        }
+
+    }
+
+    private void FixedUpdate()
+    {
+        //apply the forces to the rigidbody
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 200, 30), "Current State: " + currentState.ToString());
+    }
+
+}
