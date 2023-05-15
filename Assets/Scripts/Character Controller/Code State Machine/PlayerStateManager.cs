@@ -10,6 +10,7 @@ public class PlayerStateManager : MonoBehaviour
     public Running runningState = new Running();
     public Jumping jumpingState = new Jumping();
     public InAir inAirState = new InAir();
+    public Climbing climbingState = new Climbing();
     #endregion
 
     #region Current and previous states
