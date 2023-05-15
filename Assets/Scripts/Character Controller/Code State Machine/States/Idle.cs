@@ -11,16 +11,22 @@ public class Idle : State
         {
             return player.runningState;
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return player.jumpingState;
+        }
+        if(!player.isGrounded)
+        {
+            return player.inAirState;
+        }   
         return player.idleState;
     }
 
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Entering Idle State");
     }
 
     public override void ExitState(PlayerStateManager player)
     {
-        Debug.Log("Exiting Idle State");
     }
 }

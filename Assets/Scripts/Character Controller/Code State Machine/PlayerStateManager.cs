@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerStateManager : MonoBehaviour
     #region States
     public Idle idleState = new Idle();
     public Running runningState = new Running();
+    public Jumping jumpingState = new Jumping();
+    public InAir inAirState = new InAir();
     #endregion
 
     #region Current and previous states
@@ -15,17 +18,20 @@ public class PlayerStateManager : MonoBehaviour
     #endregion
 
     #region Properties
-    public Rigidbody rb { get; private set; }
+
+    public Rigidbody rb;
     public float speed = 5f;
-    public float jumpForce;
-    public float gravity;
-    public float fallMultiplier;
-    public float lowJumpMultiplier;
+    public float airSpeedMultiplier = 0.5f;
+    public float jumpForce = 10f;
+
+    public RaycastHit groundRayCastResults;
+    [SerializeField] private float groundRayLength = 1.5f;
+    public bool isGrounded = false; //{ get; private set; }
+    [SerializeField] private LayerMask groundLayerMask;
     #endregion 
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
     }
     private void OnEnable()
     {
@@ -49,7 +55,10 @@ public class PlayerStateManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //apply the forces to the rigidbody
+        //cast a ray downard from the bottom of the character collider to see if we are on the ground
+        Ray groundRay = new Ray(transform.position, Vector3.down * groundRayLength);
+        isGrounded = Physics.Raycast(groundRay, out groundRayCastResults, groundRayLength, ~groundLayerMask);
+        Debug.DrawRay(groundRay.origin, groundRay.direction, Color.red);
     }
 
     private void OnGUI()
