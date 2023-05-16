@@ -26,4 +26,5 @@ public class InAir : State
     {
         player.rb.MovePosition(player.rb.position + new Vector3(Input.GetAxis("Horizontal") * player.speed * Time.deltaTime, 0, 0));
     }
+
 }

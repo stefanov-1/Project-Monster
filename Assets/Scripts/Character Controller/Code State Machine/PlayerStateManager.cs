@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -24,6 +25,7 @@ public class PlayerStateManager : MonoBehaviour
     public float speed = 5f;
     public float airSpeedMultiplier = 0.5f;
     public float jumpForce = 10f;
+    public float climbSpeed = 3f;
 
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
@@ -67,4 +69,16 @@ public class PlayerStateManager : MonoBehaviour
         GUI.Label(new Rect(10, 10, 200, 30), "Current State: " + currentState.ToString());
     }
 
+    private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
+    {
+        if (other.tag == "ClimbSurface")
+        {
+            ClimbSurface surface = other.transform.parent.GetComponent<ClimbSurface>();
+            ControlValues.Instance.currentClimbStart = surface.startPoint.position;
+            ControlValues.Instance.currentClimbEnd = surface.endPoint.position;
+            
+            currentState = climbingState;
+            
+        }
+    }
 }

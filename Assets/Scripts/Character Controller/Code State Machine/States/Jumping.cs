@@ -10,6 +10,10 @@ public class Jumping : State
         {
             return player.idleState;
         }
+        if(!player.isGrounded)
+        {
+            return player.inAirState;
+        }
         return player.jumpingState;
     }
 
