@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: Hallo daar!
     m_Metadata:
       m_Items: []
+  - m_Id: 391057165758464
+    m_Localized: Ik ben Blue, ik ben naar beneden gevallen :(
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

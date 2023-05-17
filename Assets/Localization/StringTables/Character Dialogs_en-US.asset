@@ -19,7 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 53992468480
-    m_Localized: Hello there!
+    m_Localized: Hello there! it's me, ya boy blue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391057165758464
+    m_Localized: I'm Blue, I fell down here :(
     m_Metadata:
       m_Items: []
   references:
