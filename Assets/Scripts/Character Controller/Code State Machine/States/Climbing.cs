@@ -11,14 +11,29 @@ public class Climbing : State
             return player.jumpingState;
         }
 
-        float input = Input.GetAxis("Horizontal");
+        float input = ControlValues.Instance.currentClimbOrientation == ControlValues.ClimbOrientation.LeftRight 
+            ? Input.GetAxis("Horizontal") : Input.GetAxis("Vertical");
+
         Vector3 climbDirection = ControlValues.Instance.currentClimbEnd - ControlValues.Instance.currentClimbStart;
         climbDirection.Normalize();
 
-        Vector3 newPosition = player.rb.position + climbDirection * input * player.climbSpeed * Time.deltaTime;
-        if (Vector3.Distance(newPosition, ControlValues.Instance.currentClimbStart) > 1.5f
-            && Vector3.Distance(newPosition, ControlValues.Instance.currentClimbEnd) > 1.5f)
-            player.rb.MovePosition(newPosition);
+        Vector3 closer = Vector3.Distance(player.rb.position, ControlValues.Instance.currentClimbStart) <
+                         Vector3.Distance(player.rb.position, ControlValues.Instance.currentClimbEnd)
+            ? ControlValues.Instance.currentClimbStart
+            : ControlValues.Instance.currentClimbEnd;
+
+        //these two ifs are here to prevent the player from climbing outside of the climb area
+        if (closer == ControlValues.Instance.currentClimbStart &&
+            Vector3.Distance(player.rb.position, closer) < 0.2f &&
+            input < 0)
+            return player.climbingState;
+        
+        if (closer == ControlValues.Instance.currentClimbEnd &&
+            Vector3.Distance(player.rb.position, closer) < 0.2f &&
+            input > 0)
+            return player.climbingState;
+        
+        player.rb.MovePosition(player.rb.position + climbDirection * input * player.climbSpeed * Time.deltaTime);
         
         return player.climbingState;
     }

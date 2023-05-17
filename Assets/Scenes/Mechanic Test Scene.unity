@@ -414,7 +414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364161904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.486, y: 1.993, z: 0}
+  m_LocalPosition: {x: -2.8, y: 1.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1318,6 +1318,7 @@ GameObject:
   - component: {fileID: 1384344498}
   - component: {fileID: 1384344499}
   - component: {fileID: 1384344501}
+  - component: {fileID: 1384344502}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -1420,6 +1421,7 @@ MonoBehaviour:
   speed: 5
   airSpeedMultiplier: 0.5
   jumpForce: 7
+  climbSpeed: 2
   groundRayLength: 1.5
   isGrounded: 1
   groundLayerMask:
@@ -1531,6 +1533,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 88
   m_CollisionDetection: 0
+--- !u!114 &1384344502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384344492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9078937d850adca8ca740ffd25894e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentClimbStart: {x: 0, y: 0, z: 0}
+  currentClimbEnd: {x: 0, y: 0, z: 0}
 --- !u!1 &1633778529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633778529}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.518, y: -3.05, z: 0}
+  m_LocalPosition: {x: -2.86, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1767,9 +1783,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935363180}
-  m_LocalRotation: {x: 0.49841115, y: -0.5015838, z: 0.49841115, w: 0.5015838}
-  m_LocalPosition: {x: -3.5019999, y: -0.5285001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 5.043102}
+  m_LocalRotation: {x: 0.4966483, y: -0.5033294, z: 0.4966483, w: 0.50332946}
+  m_LocalPosition: {x: -2.83, y: -0.45499992, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 4.490401}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 236659771}
@@ -1836,5 +1852,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Size: {x: 1, y: 1.0759405, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

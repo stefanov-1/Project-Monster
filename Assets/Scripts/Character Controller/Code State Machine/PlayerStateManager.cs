@@ -76,6 +76,7 @@ public class PlayerStateManager : MonoBehaviour
             ClimbSurface surface = other.transform.parent.GetComponent<ClimbSurface>();
             ControlValues.Instance.currentClimbStart = surface.startPoint.position;
             ControlValues.Instance.currentClimbEnd = surface.endPoint.position;
+            ControlValues.Instance.currentClimbOrientation = surface.climbOrientation;
             
             currentState = climbingState;
             
