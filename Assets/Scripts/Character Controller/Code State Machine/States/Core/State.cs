@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class State
 {
     public abstract void EnterState(PlayerStateManager stateManager);
-    public abstract State UpdateState(PlayerStateManager stateManager);
+    public abstract void UpdateState(PlayerStateManager stateManager);
+    public abstract void FixedUpdateState(PlayerStateManager stateManager);
     public abstract void ExitState(PlayerStateManager stateManager);
 
     public override string ToString()

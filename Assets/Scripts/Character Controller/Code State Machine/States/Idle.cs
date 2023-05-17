@@ -5,23 +5,32 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class Idle : State
 {
-    public override State UpdateState(PlayerStateManager player)
+    public override void UpdateState(PlayerStateManager player)
     {
+        player.ApplyGravity();
+        
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            return player.runningState;
+            player.ChangeState(player.runningState);
+            return;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            return player.jumpingState;
+            player.ChangeState(player.jumpingState);
+            return;
         }
         if(!player.isGrounded)
         {
-            return player.inAirState;
+            player.ChangeState(player.inAirState);
+            return;
         }   
-        return player.idleState;
     }
 
+    public override void FixedUpdateState(PlayerStateManager player)
+    {
+        
+    }
+    
     public override void EnterState(PlayerStateManager player)
     {
     }

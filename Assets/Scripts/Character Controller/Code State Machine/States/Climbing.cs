@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Climbing : State
 {
-    public override State UpdateState(PlayerStateManager player)
+    public override void UpdateState(PlayerStateManager player)
     {
+        player.rb.velocity = Vector3.zero;
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            return player.jumpingState;
+            player.ChangeState(player.jumpingState);
+            return;
         }
 
         float input = ControlValues.Instance.currentClimbOrientation == ControlValues.ClimbOrientation.LeftRight 
@@ -26,21 +29,23 @@ public class Climbing : State
         if (closer == ControlValues.Instance.currentClimbStart &&
             Vector3.Distance(player.rb.position, closer) < 0.2f &&
             input < 0)
-            return player.climbingState;
+            return;
         
         if (closer == ControlValues.Instance.currentClimbEnd &&
             Vector3.Distance(player.rb.position, closer) < 0.2f &&
             input > 0)
-            return player.climbingState;
+            return;
+
+        player.rb.velocity = climbDirection * input * player.climbSpeed;
+    }
+
+    public override void FixedUpdateState(PlayerStateManager player)
+    {
         
-        player.rb.MovePosition(player.rb.position + climbDirection * input * player.climbSpeed * Time.deltaTime);
-        
-        return player.climbingState;
     }
     
     public override void EnterState(PlayerStateManager player)
     {
-        player.rb.useGravity = false;
         player.rb.velocity = Vector3.zero;
 
         Vector3 closetsPoint = ClosestPointOnLineSegment(
@@ -54,7 +59,6 @@ public class Climbing : State
 
     public override void ExitState(PlayerStateManager player)
     {
-        player.rb.useGravity = true;
     }
     
     //util function from chatGPT :)
