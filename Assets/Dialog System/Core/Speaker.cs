@@ -19,28 +19,23 @@ public class Speaker : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private TextMeshProUGUI characterName;
+    [SerializeField] private GameObject dialogCanvas;
 
     void OnEnable()
     {
         dialogTexts = new string[dialog.Count];
-        for (int i = 0; i < dialog.Count; i++)
-        {
-            foreach (Sentence currentDialogSentence in dialog[i].sentences)
-            {
-                Debug.Log(currentDialogSentence.localizedSentence.GetLocalizedString());
-            }
-            // dialogTexts[i] = dialog[i].sentences[i].sentence;
-            // dialogTexts[i] = dialog[i].sentences[i].localizedSentence.GetLocalizedString();
-        }
 
         speakCollider = GetComponent<SphereCollider>();
         speakCollider.radius = speakRange;
         speakCollider.transform.position = transform.position;
         speakCollider.isTrigger = true;
+
+        dialogCanvas.SetActive(false);
     }
     public void StartDialog()
     {
         if (isSpeaking || currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1) return;
+        dialogCanvas.SetActive(true);
         StartCoroutine(TypeText(dialog[currentDialogIndex]
         .sentences[currentSentenceIndex]
         .localizedSentence.GetLocalizedString()));
@@ -50,11 +45,6 @@ public class Speaker : MonoBehaviour
     IEnumerator TypeText(string text)
     {
         currentText = "";
-        if(currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1){
-            currentSentenceIndex = 0;
-            isSpeaking = false;
-            yield break;
-        }
         characterName.text = dialog[currentDialogIndex].sentences[currentSentenceIndex].name;
         foreach (char letter in text.ToCharArray())
         {
@@ -64,6 +54,12 @@ public class Speaker : MonoBehaviour
         }
         currentSentenceIndex++;
         isSpeaking = false;
+        if(currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1){
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+            Debug.Log("End of dialog");
+            dialogCanvas.SetActive(false);
+            yield break;
+        }
     }
 
     private void OnDrawGizmos()

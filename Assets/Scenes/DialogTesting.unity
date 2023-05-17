@@ -1052,6 +1052,7 @@ MonoBehaviour:
   currentDialogIndex: 0
   dialogText: {fileID: 848219265}
   characterName: {fileID: 2004977851}
+  dialogCanvas: {fileID: 577221974}
 --- !u!1 &1124757103
 GameObject:
   m_ObjectHideFlags: 0
