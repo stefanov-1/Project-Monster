@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Localization;
 using TMPro;
 
 [RequireComponent(typeof(SphereCollider))]
 public class Speaker : MonoBehaviour
 {
+    public UnityEvent OnDialogComplete;
     public float speakRange = 5f;
     public List<Dialog> dialog;
     private Sentence currentSentence;
@@ -15,6 +17,7 @@ public class Speaker : MonoBehaviour
     private string[] dialogTexts;
     private int currentSentenceIndex = 0;
     private bool isSpeaking = false;
+    private bool isDialogActive = false;
     private SphereCollider speakCollider;
 
     [SerializeField] private TextMeshProUGUI dialogText;
@@ -39,6 +42,7 @@ public class Speaker : MonoBehaviour
         StartCoroutine(TypeText(dialog[currentDialogIndex]
         .sentences[currentSentenceIndex]
         .localizedSentence.GetLocalizedString()));
+        isDialogActive = true;
         isSpeaking = true;
     }
 
@@ -54,12 +58,6 @@ public class Speaker : MonoBehaviour
         }
         currentSentenceIndex++;
         isSpeaking = false;
-        if(currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1){
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
-            Debug.Log("End of dialog");
-            dialogCanvas.SetActive(false);
-            yield break;
-        }
     }
 
     private void OnDrawGizmos()
@@ -72,7 +70,36 @@ public class Speaker : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // DialogManager.Dialoguemanager.StartDialogue(dialog[0]);
+            StartDialog();
+        }
+    }
+
+    private void Update()
+    {
+        if (isDialogActive)
+        {
+            if (Input.anyKeyDown)
+            {
+                if (isSpeaking)
+                {
+                    StopAllCoroutines();
+                    dialogText.text = dialog[currentDialogIndex].sentences[currentSentenceIndex].localizedSentence.GetLocalizedString();
+                    isSpeaking = false;
+                    currentSentenceIndex++;
+                }
+                else if (currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1)
+                {
+                    Debug.Log("End of dialog");
+                    dialogCanvas.SetActive(false);
+                    currentSentenceIndex = 0;
+                    isDialogActive = false;
+                    OnDialogComplete?.Invoke();
+                }
+                else
+                {
+                    StartDialog();
+                }
+            }
         }
     }
 
@@ -88,9 +115,11 @@ public class Speaker : MonoBehaviour
     {
         currentDialogIndex = index;
     }
-    public void SetDialog(string identifier){
-        if(dialog.Count == 0) return;
-        if(dialog.Contains(dialog.Find(x => x.identifier == identifier))){
+    public void SetDialog(string identifier)
+    {
+        if (dialog.Count == 0) return;
+        if (dialog.Contains(dialog.Find(x => x.identifier == identifier)))
+        {
             currentDialogIndex = dialog.IndexOf(dialog.Find(x => x.identifier == identifier));
         }
     }
