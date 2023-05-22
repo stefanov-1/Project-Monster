@@ -7,8 +7,6 @@ public class Idle : State
 {
     public override void UpdateState(PlayerStateManager player)
     {
-        if (!player.isGrounded)
-            player.ApplyGravity();
         
         if (Input.GetAxisRaw("Horizontal") != 0)
         {

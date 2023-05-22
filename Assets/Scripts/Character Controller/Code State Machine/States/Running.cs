@@ -20,8 +20,6 @@ public class Running : State
             (acceleration < 0 && player.rb.velocity.x > -player.runMaxSpeed))
             player.rb.velocity += new Vector3(acceleration, 0, 0);
 
-        if (!player.isGrounded)
-            player.ApplyGravity();
         
         if(Input.GetKeyDown(KeyCode.Space))
         {

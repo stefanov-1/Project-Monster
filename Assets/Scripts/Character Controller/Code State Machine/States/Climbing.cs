@@ -54,12 +54,13 @@ public class Climbing : State
             player.rb.position);
 
         player.rb.position = closetsPoint; // snap the player to the clmbable surface
-        Debug.Log($"taraget: {closetsPoint}");
-        Debug.Log($"actual: {player.rb.position}");
+
+        player.rb.useGravity = false;
     }
 
     public override void ExitState(PlayerStateManager player)
     {
+        player.rb.useGravity = true;
     }
     
     //util function from chatGPT :)

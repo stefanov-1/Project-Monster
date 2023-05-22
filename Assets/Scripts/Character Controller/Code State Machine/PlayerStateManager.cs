@@ -78,16 +78,6 @@ public class PlayerStateManager : MonoBehaviour
         GUI.Label(new Rect(10, 20, 200, 30), "Current Velocity: " + rb.velocity.ToString());
     }
 
-    public void ApplyGravity()
-    {
-        //rb.AddForce(new Vector3(0, -gravityForce, 0), ForceMode.Acceleration);
-    }
-
-    public void ApplyDrag()
-    {
-        //rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, drag * Time.deltaTime);
-    }
-    
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
     {
         if (other.tag == "ClimbSurface")
