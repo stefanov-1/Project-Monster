@@ -27,10 +27,8 @@ public class PlayerStateManager : MonoBehaviour
     public float runMaxSpeed = 5f;
     public float airAcceleration = 5f;
     public float airMaxSpeed = 5f;
-    public float gravityForce = 5f;
     public float jumpForce = 5f;
     public float climbSpeed = 5f;
-    public float drag = 0.1f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
