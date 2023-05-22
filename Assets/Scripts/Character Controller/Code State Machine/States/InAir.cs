@@ -33,7 +33,7 @@ public class InAir : State
         if ((acceleration > 0  && player.rb.velocity.x < player.airMaxSpeed) || 
             (acceleration < 0 && player.rb.velocity.x > -player.airMaxSpeed))
             player.rb.velocity += new Vector3(acceleration, 0, 0);
-
+        
         player.ApplyGravity();
     }
 

@@ -54,7 +54,8 @@ public class Climbing : State
             player.rb.position);
 
         player.rb.position = closetsPoint; // snap the player to the clmbable surface
-
+        Debug.Log($"taraget: {closetsPoint}");
+        Debug.Log($"actual: {player.rb.position}");
     }
 
     public override void ExitState(PlayerStateManager player)

@@ -30,6 +30,7 @@ public class PlayerStateManager : MonoBehaviour
     public float gravityForce = 5f;
     public float jumpForce = 5f;
     public float climbSpeed = 5f;
+    public float drag = 0.1f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
@@ -79,9 +80,14 @@ public class PlayerStateManager : MonoBehaviour
 
     public void ApplyGravity()
     {
-        rb.AddForce(new Vector3(0, -gravityForce, 0), ForceMode.Acceleration);
+        //rb.AddForce(new Vector3(0, -gravityForce, 0), ForceMode.Acceleration);
     }
 
+    public void ApplyDrag()
+    {
+        //rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, drag * Time.deltaTime);
+    }
+    
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
     {
         if (other.tag == "ClimbSurface")
@@ -91,7 +97,7 @@ public class PlayerStateManager : MonoBehaviour
             ControlValues.Instance.currentClimbEnd = surface.endPoint.position;
             ControlValues.Instance.currentClimbOrientation = surface.climbOrientation;
             
-            currentState = climbingState;
+            ChangeState(climbingState);
             
         }
     }
