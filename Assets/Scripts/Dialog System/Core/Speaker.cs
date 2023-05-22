@@ -56,8 +56,8 @@ public class Speaker : MonoBehaviour
             dialogText.text = currentText;
             yield return new WaitForSeconds(dialog[currentDialogIndex].sentences[currentSentenceIndex].delay);
         }
-        currentSentenceIndex++;
         dialog[currentDialogIndex].sentences[currentSentenceIndex].OnSentenceComplete?.Invoke();
+        currentSentenceIndex++;
         isSpeaking = false;
     }
 
@@ -81,21 +81,22 @@ public class Speaker : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
-                if (isSpeaking)
+                if (isSpeaking && currentSentenceIndex <= dialog[currentDialogIndex].sentences.Length - 1)
                 {
                     StopAllCoroutines();
                     dialogText.text = dialog[currentDialogIndex].sentences[currentSentenceIndex].localizedSentence.GetLocalizedString();
                     isSpeaking = false;
-                    currentSentenceIndex++;
                     dialog[currentDialogIndex].sentences[currentSentenceIndex].OnSentenceComplete?.Invoke();
+                    currentSentenceIndex++;
                 }
                 else if (currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1)
                 {
                     Debug.Log("End of dialog");
                     dialogCanvas.SetActive(false);
-                    currentSentenceIndex = 0;
                     dialog[currentDialogIndex].OnDialogComplete?.Invoke();
+                    currentSentenceIndex = 0;
                     isDialogActive = false;
+                    isSpeaking = false;
                 }
                 else
                 {

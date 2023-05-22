@@ -1281,9 +1281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83680854e1d9cc49b7977365fb650da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDialogComplete:
-    m_PersistentCalls:
-      m_Calls: []
   speakRange: 2
   dialog:
   - {fileID: 11400000, guid: 19d26c1246d4d01458e056f30598f85a, type: 2}
@@ -1501,7 +1498,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33352
+  m_Name: pb_Mesh38382
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
