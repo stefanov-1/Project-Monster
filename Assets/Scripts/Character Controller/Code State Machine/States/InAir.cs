@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class InAir : State
 {
-    public override State UpdateState(PlayerStateManager player)
+    public override void UpdateState(PlayerStateManager player)
     {
         if (player.isGrounded)
         {
-            return player.idleState;
+            player.ChangeState(player.idleState);
+            return;
         }
         InAirMovement(player);
-        return player.inAirState;
     }
 
+    public override void FixedUpdateState(PlayerStateManager player)
+    {
+        
+    }
+    
     public override void EnterState(PlayerStateManager player)
     {
     }
@@ -24,6 +29,11 @@ public class InAir : State
 
     void InAirMovement(PlayerStateManager player)
     {
-        player.rb.MovePosition(player.rb.position + new Vector3(Input.GetAxis("Horizontal") * player.speed * Time.deltaTime, 0, 0));
+        float acceleration = Input.GetAxis("Horizontal") * player.airAcceleration * Time.deltaTime;
+        if ((acceleration > 0  && player.rb.velocity.x < player.airMaxSpeed) || 
+            (acceleration < 0 && player.rb.velocity.x > -player.airMaxSpeed))
+            player.rb.velocity += new Vector3(acceleration, 0, 0);
+        
     }
+
 }

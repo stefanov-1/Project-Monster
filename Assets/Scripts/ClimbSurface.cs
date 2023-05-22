@@ -7,7 +7,7 @@ public class ClimbSurface : MonoBehaviour
     public Transform startPoint;
     public Transform endPoint;
     public Transform Collision;
-
+    public ControlValues.ClimbOrientation climbOrientation;
 
     // Start is called before the first frame update
     void Start()

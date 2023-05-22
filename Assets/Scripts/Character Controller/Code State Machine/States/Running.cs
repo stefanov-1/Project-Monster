@@ -1,4 +1,5 @@
-﻿using Unity;
+﻿using System;
+using Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,37 @@ using UnityEngine.InputSystem;
 
 public class Running : State
 {
-    public override State UpdateState(PlayerStateManager player)
+    public override void UpdateState(PlayerStateManager player)
     {
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
-            return player.idleState;
+            player.ChangeState(player.idleState);
+            return;
         }
-        //player.rb.velocity = new Vector3(Input.GetAxis("Horizontal") * player.speed * Time.deltaTime, player.rb.velocity.y);
-        player.rb.MovePosition(player.rb.position + new Vector3(Input.GetAxis("Horizontal") * player.speed * Time.deltaTime, 0, 0));
+
+        float acceleration = Input.GetAxis("Horizontal") * player.runAcceleration * Time.deltaTime;
+        if ((acceleration > 0  && player.rb.velocity.x < player.runMaxSpeed) || 
+            (acceleration < 0 && player.rb.velocity.x > -player.runMaxSpeed))
+            player.rb.velocity += new Vector3(acceleration, 0, 0);
+
+        
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            return player.jumpingState;
+            player.ChangeState(player.jumpingState);
+            return;
         }
         if(!player.isGrounded)
         {
-            return player.inAirState;
+            player.ChangeState(player.inAirState);
+            return;
         }
-        return player.runningState;
     }
 
+    public override void FixedUpdateState(PlayerStateManager player)
+    {
+        
+    }
+    
     public override void EnterState(PlayerStateManager player)
     {
     }
