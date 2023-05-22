@@ -115,14 +115,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 9091859297822107741}
-  runAcceleration: 100
-  runMaxSpeed: 5
-  airAcceleration: 100
-  airMaxSpeed: 5
-  gravityForce: 5
+  runAcceleration: 200
+  runMaxSpeed: 7
+  airAcceleration: 50
+  airMaxSpeed: 3
   jumpForce: 20
-  climbSpeed: 2
-  drag: 35.03
+  climbSpeed: 5
   groundRayLength: 1.5
   isGrounded: 1
   groundLayerMask:
