@@ -50,6 +50,7 @@ public class PlayerStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        //hardcoded limitations because unity is stupid
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, eulerRotation.y, 0);
