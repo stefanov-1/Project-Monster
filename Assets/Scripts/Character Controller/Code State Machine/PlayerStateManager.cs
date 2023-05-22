@@ -29,6 +29,7 @@ public class PlayerStateManager : MonoBehaviour
     public float airMaxSpeed = 5f;
     public float jumpForce = 5f;
     public float climbSpeed = 5f;
+    public float slideSpeed = 10f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
@@ -90,7 +91,12 @@ public class PlayerStateManager : MonoBehaviour
             ControlValues.Instance.currentClimbOrientation = surface.climbOrientation;
             
             ChangeState(climbingState);
+        }
+
+        if (other.tag == "SlideSurface")
+        {
             
         }
+        
     }
 }
