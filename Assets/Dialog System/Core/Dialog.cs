@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Dialog", menuName = "Dialog System/Dialog")]
 public class Dialog : ScriptableObject
 {
     public string identifier;
     public Sentence[] sentences;
+
+    public UnityEvent OnDialogComplete;
 }
 
 [System.Serializable]
@@ -20,4 +23,5 @@ public class Sentence
     // public string sentence;
     public LocalizedString localizedSentence;
     public float delay = 0.03f;
+    public UnityEvent OnSentenceComplete;
 }

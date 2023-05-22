@@ -5,10 +5,10 @@ using UnityEngine.Events;
 using UnityEngine.Localization;
 using TMPro;
 
+
 [RequireComponent(typeof(SphereCollider))]
 public class Speaker : MonoBehaviour
 {
-    public UnityEvent OnDialogComplete;
     public float speakRange = 5f;
     public List<Dialog> dialog;
     private Sentence currentSentence;
@@ -54,9 +54,10 @@ public class Speaker : MonoBehaviour
         {
             currentText += letter;
             dialogText.text = currentText;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(dialog[currentDialogIndex].sentences[currentSentenceIndex].delay);
         }
         currentSentenceIndex++;
+        dialog[currentDialogIndex].sentences[currentSentenceIndex].OnSentenceComplete?.Invoke();
         isSpeaking = false;
     }
 
@@ -86,14 +87,15 @@ public class Speaker : MonoBehaviour
                     dialogText.text = dialog[currentDialogIndex].sentences[currentSentenceIndex].localizedSentence.GetLocalizedString();
                     isSpeaking = false;
                     currentSentenceIndex++;
+                    dialog[currentDialogIndex].sentences[currentSentenceIndex].OnSentenceComplete?.Invoke();
                 }
                 else if (currentSentenceIndex > dialog[currentDialogIndex].sentences.Length - 1)
                 {
                     Debug.Log("End of dialog");
                     dialogCanvas.SetActive(false);
                     currentSentenceIndex = 0;
+                    dialog[currentDialogIndex].OnDialogComplete?.Invoke();
                     isDialogActive = false;
-                    OnDialogComplete?.Invoke();
                 }
                 else
                 {
