@@ -17,6 +17,9 @@ public class ControlValues : MonoBehaviour
     public Vector3 currentClimbStart;
     public Vector3 currentClimbEnd;
     public ClimbOrientation currentClimbOrientation = ClimbOrientation.LeftRight;
+    public Vector3 currentSlideStart;
+    public Vector3 currentSlideEnd;
+    public Vector3 currentSlideDirection;
     
     private void Awake()
     {

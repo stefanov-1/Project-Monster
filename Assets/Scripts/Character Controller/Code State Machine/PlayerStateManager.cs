@@ -12,6 +12,7 @@ public class PlayerStateManager : MonoBehaviour
     public Jumping jumpingState = new Jumping();
     public InAir inAirState = new InAir();
     public Climbing climbingState = new Climbing();
+    public Sliding slideState = new Sliding();
     #endregion
 
     #region Current and previous states
@@ -29,6 +30,7 @@ public class PlayerStateManager : MonoBehaviour
     public float airMaxSpeed = 5f;
     public float jumpForce = 5f;
     public float climbSpeed = 5f;
+    public float slideSpeed = 10f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
@@ -50,6 +52,7 @@ public class PlayerStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        //hardcoded limitations because unity is stupid
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(0, eulerRotation.y, 0);
@@ -89,7 +92,17 @@ public class PlayerStateManager : MonoBehaviour
             ControlValues.Instance.currentClimbOrientation = surface.climbOrientation;
             
             ChangeState(climbingState);
-            
         }
+
+        if (other.tag == "SlideSurface")
+        {
+            SlideSurface surface = other.transform.parent.GetComponent<SlideSurface>();
+            ControlValues.Instance.currentSlideStart = surface.startPoint.position;
+            ControlValues.Instance.currentSlideEnd = surface.endPoint.position;
+            ControlValues.Instance.currentSlideDirection = (surface.endPoint.position - surface.startPoint.position).normalized;
+            
+            ChangeState(slideState);
+        }
+        
     }
 }
