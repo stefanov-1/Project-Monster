@@ -22,7 +22,9 @@ public class Idle : State
         {
             player.ChangeState(player.inAirState);
             return;
-        }   
+        }  
+        
+        player.ApplyDrag();
     }
 
     public override void FixedUpdateState(PlayerStateManager player)
