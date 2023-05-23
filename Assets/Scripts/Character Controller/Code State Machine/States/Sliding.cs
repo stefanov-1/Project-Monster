@@ -12,6 +12,12 @@ public class Sliding : State
             return;
         }
 
+        if (Vector3.Distance(player.rb.position, ControlValues.Instance.currentSlideEnd) < 0.5f)
+        {
+            player.ChangeState(player.idleState);
+            return;
+        }
+        
         player.rb.velocity = ControlValues.Instance.currentSlideDirection * player.slideSpeed;
 
     }
