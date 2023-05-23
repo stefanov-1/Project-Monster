@@ -1320,6 +1320,7 @@ GameObject:
   - component: {fileID: 746201082}
   - component: {fileID: 746201081}
   - component: {fileID: 746201084}
+  - component: {fileID: 746201085}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1504,6 +1505,8 @@ PlayableDirector:
     value: {fileID: 192129588}
   - key: {fileID: 6605443538149469335, guid: cf06c5bd08fffd2479572c42fc4688fd, type: 2}
     value: {fileID: 192129589}
+  - key: {fileID: -1546573414624380736, guid: cf06c5bd08fffd2479572c42fc4688fd, type: 2}
+    value: {fileID: 746201085}
   m_ExposedReferences:
     m_References:
     - 2664d314067427c4c941b332cf51af18: {fileID: 290829105}
@@ -1534,6 +1537,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f09ebef68e5f044b8009d60c0b9dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TemplateScene: TemplateScene
+  timeline: {fileID: 11400000, guid: cf06c5bd08fffd2479572c42fc4688fd, type: 2}
+  timer: 0
+  timeDelay: 3
+--- !u!114 &746201085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746201080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1719b65053c33314bad673dd1ce6d407, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 746201084}
+          m_TargetAssemblyTypeName: CutSceneSwitch, Assembly-CSharp
+          m_MethodName: SwitchToNextScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &782838484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,7 +1820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearColorMode: 1
-  backgroundColorHDR: {r: 1.6603774, g: 1.6603774, b: 1.6603774, a: 1}
+  backgroundColorHDR: {r: 0.023570227, g: 0.020797258, b: 0.06655122, a: 1}
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
