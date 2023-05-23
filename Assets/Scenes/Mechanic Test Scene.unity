@@ -1518,6 +1518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1384344501}
+  horizontalDrag: 5
   runAcceleration: 100
   runMaxSpeed: 5
   airAcceleration: 100
@@ -1525,6 +1526,7 @@ MonoBehaviour:
   jumpForce: 20
   climbSpeed: 2
   slideSpeed: 10
+  climbExitJumpForce: 3
   groundRayLength: 1.5
   isGrounded: 1
   groundLayerMask:
@@ -2223,6 +2225,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091859297822107738, guid: 843423a3ec0a09045afcf92a689768fc,
+        type: 3}
+      propertyPath: climbExitJumpForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091859297822107741, guid: 843423a3ec0a09045afcf92a689768fc,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843423a3ec0a09045afcf92a689768fc, type: 3}
