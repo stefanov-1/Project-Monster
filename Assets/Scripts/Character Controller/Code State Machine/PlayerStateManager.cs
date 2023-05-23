@@ -12,6 +12,7 @@ public class PlayerStateManager : MonoBehaviour
     public Jumping jumpingState = new Jumping();
     public InAir inAirState = new InAir();
     public Climbing climbingState = new Climbing();
+    public Sliding slideState = new Sliding();
     #endregion
 
     #region Current and previous states
@@ -95,7 +96,12 @@ public class PlayerStateManager : MonoBehaviour
 
         if (other.tag == "SlideSurface")
         {
+            SlideSurface surface = other.transform.parent.GetComponent<SlideSurface>();
+            ControlValues.Instance.currentSlideStart = surface.startPoint.position;
+            ControlValues.Instance.currentSlideEnd = surface.endPoint.position;
+            ControlValues.Instance.currentSlideDirection = (surface.endPoint.position - surface.startPoint.position).normalized;
             
+            ChangeState(slideState);
         }
         
     }
