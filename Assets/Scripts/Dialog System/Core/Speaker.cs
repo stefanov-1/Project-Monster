@@ -19,7 +19,7 @@ public class Speaker : MonoBehaviour
     private bool isSpeaking = false;
     private bool isDialogActive = false;
     private bool isWithinRange = false;
-    private SphereCollider speakCollider;
+    [SerializeField] private SphereCollider speakCollider;
 
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private TextMeshProUGUI characterName;
