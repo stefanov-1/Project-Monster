@@ -24,6 +24,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public Rigidbody rb;
 
+    public float horizontalDrag = 5f;
     public float runAcceleration = 5f;
     public float runMaxSpeed = 5f;
     public float airAcceleration = 5f;
@@ -75,7 +76,12 @@ public class PlayerStateManager : MonoBehaviour
         newState.EnterState(this);
         currentState = newState;
     }
-    
+
+    public void ApplyDrag()
+    {
+        rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x, 0, horizontalDrag * Time.deltaTime), rb.velocity.y, 0);
+    }
+
     private void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 200, 30), "Current State: " + currentState.ToString());
