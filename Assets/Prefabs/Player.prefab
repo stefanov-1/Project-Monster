@@ -121,6 +121,7 @@ MonoBehaviour:
   airMaxSpeed: 3
   jumpForce: 20
   climbSpeed: 5
+  slideSpeed: 15
   groundRayLength: 1.5
   isGrounded: 1
   groundLayerMask:
@@ -247,3 +248,6 @@ MonoBehaviour:
   currentClimbStart: {x: 0, y: 0, z: 0}
   currentClimbEnd: {x: 0, y: 0, z: 0}
   currentClimbOrientation: 1
+  currentSlideStart: {x: 0, y: 0, z: 0}
+  currentSlideEnd: {x: 0, y: 0, z: 0}
+  currentSlideDirection: {x: 0, y: 0, z: 0}
