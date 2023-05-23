@@ -6,10 +6,10 @@ using UnityEngine.Localization;
 using TMPro;
 
 
-[RequireComponent(typeof(SphereCollider))]
 public class Speaker : MonoBehaviour
 {
     public float speakRange = 5f;
+    [SerializeField] private bool activateInRange = true;
     public List<Dialog> dialog;
     private Sentence currentSentence;
     public static string currentText = "";
@@ -18,21 +18,23 @@ public class Speaker : MonoBehaviour
     private int currentSentenceIndex = 0;
     private bool isSpeaking = false;
     private bool isDialogActive = false;
+    private bool isWithinRange = false;
     private SphereCollider speakCollider;
 
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private TextMeshProUGUI characterName;
     [SerializeField] private GameObject dialogCanvas;
 
-    void OnEnable()
+    void Start()
     {
-        dialogTexts = new string[dialog.Count];
-
-        speakCollider = GetComponent<SphereCollider>();
+        speakCollider = gameObject.AddComponent<SphereCollider>();
         speakCollider.radius = speakRange;
         speakCollider.transform.position = transform.position;
         speakCollider.isTrigger = true;
-
+    }
+    void OnEnable()
+    {
+        dialogTexts = new string[dialog.Count];
         dialogCanvas.SetActive(false);
     }
     public void StartDialog()
@@ -69,14 +71,25 @@ public class Speaker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if(activateInRange && other.gameObject.layer == LayerMask.NameToLayer("Player") && !isDialogActive)
         {
             StartDialog();
+            isWithinRange = true;
+        }
+    }
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            isWithinRange = false;
         }
     }
 
     private void Update()
     {
+        if(!isDialogActive && isWithinRange && Input.GetButtonDown("Interact"))
+        {
+            StartDialog();
+        }
         if (isDialogActive)
         {
             if (Input.anyKeyDown)
