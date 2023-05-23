@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 9091859297822107741}
+  horizontalDrag: 5
   runAcceleration: 200
   runMaxSpeed: 7
   airAcceleration: 50
@@ -122,6 +123,7 @@ MonoBehaviour:
   jumpForce: 20
   climbSpeed: 5
   slideSpeed: 15
+  climbExitJumpForce: 10
   groundRayLength: 1.5
   isGrounded: 1
   groundLayerMask:
@@ -232,7 +234,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 88
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9091859297822107742
 MonoBehaviour:
   m_ObjectHideFlags: 0
