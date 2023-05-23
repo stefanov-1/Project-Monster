@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,6 +62,9 @@ public class Climbing : State
     public override void ExitState(PlayerStateManager player)
     {
         player.rb.useGravity = true;
+        
+        player.rb.AddForce(new Vector3(Mathf.Round(Input.GetAxis("Horizontal")), 0, 0) * player.climbExitJumpForce, ForceMode.Impulse);
+        
     }
 
 }

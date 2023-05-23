@@ -32,6 +32,7 @@ public class PlayerStateManager : MonoBehaviour
     public float jumpForce = 5f;
     public float climbSpeed = 5f;
     public float slideSpeed = 10f;
+    public float climbExitJumpForce = 3f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
