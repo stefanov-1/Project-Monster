@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "New Dialog", menuName = "Dialog System/Dialog")]
-public class Dialog : ScriptableObject
+// [CreateAssetMenu(fileName = "New Dialog", menuName = "Dialog System/Dialog")]
+[System.Serializable]
+public class Dialog
 {
     public string identifier;
     public Sentence[] sentences;
