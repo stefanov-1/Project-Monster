@@ -42,7 +42,11 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Start()
     {
+        //add current position as checkpoint at the start for testing
+        ControlValues.Instance.lastCheckpoint = transform.position;
+        ControlValues.Instance.checkpointBacklog.Add(transform.position);
     }
+    
     private void OnEnable()
     {
 
@@ -83,6 +87,13 @@ public class PlayerStateManager : MonoBehaviour
         rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x, 0, horizontalDrag * Time.deltaTime), rb.velocity.y, 0);
     }
 
+    public void Respawn()
+    {
+        rb.velocity = Vector3.zero;
+        rb.position = ControlValues.Instance.lastCheckpoint;
+        ChangeState(idleState);
+    }
+    
     private void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 200, 30), "Current State: " + currentState.ToString());
@@ -91,24 +102,40 @@ public class PlayerStateManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
     {
-        if (other.tag == "ClimbSurface")
+        switch (other.tag)
         {
-            ClimbSurface surface = other.transform.parent.GetComponent<ClimbSurface>();
-            ControlValues.Instance.currentClimbStart = surface.startPoint.position;
-            ControlValues.Instance.currentClimbEnd = surface.endPoint.position;
-            ControlValues.Instance.currentClimbOrientation = surface.climbOrientation;
+            case "ClimbSurface":
+                ClimbSurface climbSurface = other.transform.parent.GetComponent<ClimbSurface>();
+                ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
+                ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
+                ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
             
-            ChangeState(climbingState);
-        }
-
-        if (other.tag == "SlideSurface")
-        {
-            SlideSurface surface = other.transform.parent.GetComponent<SlideSurface>();
-            ControlValues.Instance.currentSlideStart = surface.startPoint.position;
-            ControlValues.Instance.currentSlideEnd = surface.endPoint.position;
-            ControlValues.Instance.currentSlideDirection = (surface.endPoint.position - surface.startPoint.position).normalized;
+                ChangeState(climbingState);
+                break;
             
-            ChangeState(slideState);
+            case "SlideSurface":
+                SlideSurface slideSurface = other.transform.parent.GetComponent<SlideSurface>();
+                ControlValues.Instance.currentSlideStart = slideSurface.startPoint.position;
+                ControlValues.Instance.currentSlideEnd = slideSurface.endPoint.position;
+                ControlValues.Instance.currentSlideDirection = (slideSurface.endPoint.position - slideSurface.startPoint.position).normalized;
+            
+                ChangeState(slideState);
+                break;
+            
+            case "DeathSurface":
+                Respawn();
+                break;
+            
+            case "Checkpoint":
+                if (!ControlValues.Instance.checkpointBacklog.Contains(other.transform.position))
+                {
+                    ControlValues.Instance.lastCheckpoint = other.transform.position;
+                    ControlValues.Instance.checkpointBacklog.Add(other.transform.position);
+                }
+                break;
+            
+            default:
+                break;
         }
         
     }

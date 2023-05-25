@@ -20,7 +20,9 @@ public class ControlValues : MonoBehaviour
     public Vector3 currentSlideStart;
     public Vector3 currentSlideEnd;
     public Vector3 currentSlideDirection;
-    
+    public Vector3 lastCheckpoint;
+    public List<Vector3> checkpointBacklog = new List<Vector3>();
+
     private void Awake()
     {
         if (Instance is null)
