@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.38354, g: 325.1084, b: 430.30957, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1507,6 +1507,10 @@ PlayableDirector:
     value: {fileID: 192129589}
   - key: {fileID: -1546573414624380736, guid: cf06c5bd08fffd2479572c42fc4688fd, type: 2}
     value: {fileID: 746201085}
+  - key: {fileID: 2727856237804126526, guid: cf06c5bd08fffd2479572c42fc4688fd, type: 2}
+    value: {fileID: 746201081}
+  - key: {fileID: -4848632383117086456, guid: cf06c5bd08fffd2479572c42fc4688fd, type: 2}
+    value: {fileID: 746201081}
   m_ExposedReferences:
     m_References:
     - 2664d314067427c4c941b332cf51af18: {fileID: 290829105}
