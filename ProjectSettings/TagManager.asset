@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ClimbSurface
   - SlideSurface
+  - DeathSurface
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
