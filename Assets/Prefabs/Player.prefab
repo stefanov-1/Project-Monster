@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 9091859297822107741}
+  feet: {fileID: 9128862613470445196}
   horizontalDrag: 5
   runAcceleration: 200
   runMaxSpeed: 7
@@ -156,6 +157,7 @@ MonoBehaviour:
   climbSpeed: 5
   slideSpeed: 15
   climbExitJumpForce: 10
+  coyoteGraceTime: 0.1
   groundRayLength: 1.5
   isGrounded: 1
 --- !u!114 &9091859297822107739
@@ -284,3 +286,4 @@ MonoBehaviour:
   currentSlideDirection: {x: 0, y: 0, z: 0}
   lastCheckpoint: {x: 0, y: 0, z: 0}
   checkpointBacklog: []
+  lastGroundedTime: 0
