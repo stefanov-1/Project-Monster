@@ -11,6 +11,14 @@ public class InAir : State
             player.ChangeState(player.idleState);
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) &&
+            Time.timeSinceLevelLoad - ControlValues.Instance.lastGroundedTime <= player.coyoteGraceTime) //coyote time jump in air
+        {
+            player.ChangeState(player.jumpingState);
+            return;
+        }
+        
         InAirMovement(player);
     }
 
