@@ -19,11 +19,29 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 53992468480
-    m_Localized: Hallo daar!
+    m_Localized: Hallo, kleine blauwe vriend. Je lijkt verdwaald. Mijn naam is Spike,
+      blij je te ontmoeten!
     m_Metadata:
       m_Items: []
   - m_Id: 391057165758464
-    m_Localized: Ik ben Blue, ik ben naar beneden gevallen :(
+    m_Localized: AAAA! Eet me alsjeblieft niet op!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3624986466578432
+    m_Localized: Wow, je hoeft niet bang te zijn! Ik zie er misschien groot en eng
+      uit, maar ik ben niet anders dan jij. Hoe dan ook, waar ga je zo snel heen?
+      Het is daar gevaarlijk in deze storm.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3625164212793344
+    m_Localized: Oh... nou ja, ik probeer gewoon terug naar huis te komen. Vind je
+      het erg om aan de kant te gaan zodat ik erdoorheen kan?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3639721987665920
+    m_Localized: Nou, zie je, ik heb geprobeerd om daarboven een kers te pakken,
+      maar ik ben te groot om het te halen... Zeg, als je die kers voor me kunt pakken,
+      laat ik je door deze deur gaan!
     m_Metadata:
       m_Items: []
   references:

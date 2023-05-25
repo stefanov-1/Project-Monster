@@ -19,12 +19,29 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 53992468480
-    m_Localized: Hello, little blue friend! Where are you going in such a hurry?
-      It's dangerous out there in the storm.
+    m_Localized: Hello, little blue friend. You look lost. My name is Spike, pleased
+      to meet you!
     m_Metadata:
       m_Items: []
   - m_Id: 391057165758464
-    m_Localized: 
+    m_Localized: Ahhh! Please don't eat me!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3624986466578432
+    m_Localized: Woah, there's no need to be scared! I may look big and scary, but
+      I'm no different from you. Anyway, where are you going in such a hurry? It's
+      dangerous out there in this storm.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3625164212793344
+    m_Localized: Oh... well, I'm just trying to make my way back home. Do you mind
+      moving so I can pass through?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3639721987665920
+    m_Localized: Well, you see, I've been trying to get a cherry from up there but
+      I'm too big to make it... Say, if you can get that cherry for me, I'll let
+      you pass through this door no problem!
     m_Metadata:
       m_Items: []
   references:

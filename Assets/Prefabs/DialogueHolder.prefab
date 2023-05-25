@@ -504,12 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakRange: 5
   activateInRange: 1
-  dialog:
-  - identifier: 
-    sentences: []
-    OnDialogComplete:
-      m_PersistentCalls:
-        m_Calls: []
+  dialog: []
   currentDialogIndex: 0
   speakCollider: {fileID: 0}
   dialogText: {fileID: 3590782567088123353}
