@@ -34,6 +34,7 @@ public class PlayerStateManager : MonoBehaviour
     public float climbSpeed = 5f;
     public float slideSpeed = 10f;
     public float climbExitJumpForce = 3f;
+    public float coyoteGraceTime = 0.1f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
@@ -69,9 +70,11 @@ public class PlayerStateManager : MonoBehaviour
         currentState.FixedUpdateState(this);
         
         //cast a ray downard from the bottom of the character collider to see if we are on the ground
-        //Ray groundRay = new Ray(transform.position, Vector3.down * groundRayLength);
-        //isGrounded = Physics.Raycast(groundRay, out groundRayCastResults, groundRayLength, ~groundLayerMask);
         isGrounded = Physics.OverlapSphere(feet.position, 0.4f, ~LayerMask.GetMask("Player")).Length > 0;
+        if (isGrounded)
+        {
+            ControlValues.Instance.lastGroundedTime = Time.timeSinceLevelLoad;
+        }
     }
 
     public void ChangeState(State newState)
@@ -96,8 +99,9 @@ public class PlayerStateManager : MonoBehaviour
     
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 200, 30), "Current State: " + currentState.ToString());
-        GUI.Label(new Rect(10, 20, 200, 30), "Current Velocity: " + rb.velocity.ToString());
+        GUI.Label(new Rect(10, 10, 300, 30), "Current State: " + currentState.ToString());
+        GUI.Label(new Rect(10, 20, 300, 30), "Current Velocity: " + rb.velocity.ToString());
+        GUI.Label(new Rect(10, 30, 300, 30), (Time.timeSinceLevelLoad - ControlValues.Instance.lastGroundedTime).ToString());
     }
 
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way

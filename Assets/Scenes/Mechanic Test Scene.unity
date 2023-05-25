@@ -2168,6 +2168,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091859297822107738, guid: 843423a3ec0a09045afcf92a689768fc,
         type: 3}
+      propertyPath: coyoteGraceTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091859297822107738, guid: 843423a3ec0a09045afcf92a689768fc,
+        type: 3}
       propertyPath: climbExitJumpForce
       value: 10
       objectReference: {fileID: 0}
