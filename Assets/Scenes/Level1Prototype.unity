@@ -8669,27 +8669,27 @@ PrefabInstance:
     - target: {fileID: 3590782567326969405, guid: ef71e001f02f78e409a52fde75e7324b,
         type: 3}
       propertyPath: dialog.Array.data[0].sentences.Array.data[0].OnSentenceComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3590782567326969405, guid: ef71e001f02f78e409a52fde75e7324b,
         type: 3}
       propertyPath: dialog.Array.data[0].sentences.Array.data[1].OnSentenceComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3590782567326969405, guid: ef71e001f02f78e409a52fde75e7324b,
         type: 3}
       propertyPath: dialog.Array.data[0].sentences.Array.data[2].OnSentenceComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3590782567326969405, guid: ef71e001f02f78e409a52fde75e7324b,
         type: 3}
       propertyPath: dialog.Array.data[0].sentences.Array.data[3].OnSentenceComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3590782567326969405, guid: ef71e001f02f78e409a52fde75e7324b,
         type: 3}
       propertyPath: dialog.Array.data[0].sentences.Array.data[4].OnSentenceComplete.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3590782567326969405, guid: ef71e001f02f78e409a52fde75e7324b,
         type: 3}

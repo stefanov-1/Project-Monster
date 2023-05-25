@@ -67,6 +67,30 @@ MonoBehaviour:
     m_Localized: Veel succes daarbuiten! Ik hoop dat je veilig terugkomt.
     m_Metadata:
       m_Items: []
+  - m_Id: 3652339066466304
+    m_Localized: Hallo daar. Gaat het?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652366186835968
+    m_Localized: Niet echt... toen de storm begon raakte ik mijn zusje Dazzle kwijt.
+      Nu ben ik te bang om haar te zoeken...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652393462394880
+    m_Localized: Oh, dat is verschrikkelijk... Nou, ik ga zelf die kant op. Als je
+      wilt, kan ik je helpen terug te komen naar je zus?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652823500189696
+    m_Localized: Oh, ik zou zo dankbaar zijn als je dat zou willen doen! Ik ben te
+      bang om alleen te gaan...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652925887344640
+    m_Localized: Het zou helemaal geen probleem zijn! Ik zou het gezelschap fijn
+      vinden.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

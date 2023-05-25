@@ -66,6 +66,28 @@ MonoBehaviour:
     m_Localized: Good luck out there! Hope you make it back safe.
     m_Metadata:
       m_Items: []
+  - m_Id: 3652339066466304
+    m_Localized: Hey there. Are you okay?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652366186835968
+    m_Localized: Not really... I got separated from my sister, Dazzle, when the storm
+      hit. Now, I'm too scared to make it back to her...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652393462394880
+    m_Localized: Oh, that's terrible... Well, I'm heading in that direction myself.
+      If you want, I can help you get back to your sister?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652823500189696
+    m_Localized: Oh, I would be so grateful if you did! I'm too scared to go alone...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652925887344640
+    m_Localized: It would be no problem at all! I'd love the company.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

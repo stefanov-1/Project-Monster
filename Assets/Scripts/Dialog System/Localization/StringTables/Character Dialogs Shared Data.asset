@@ -55,6 +55,26 @@ MonoBehaviour:
     m_Key: Lvl1.Spike.GoodLuck
     m_Metadata:
       m_Items: []
+  - m_Id: 3652339066466304
+    m_Key: Lvl2.Blue.Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652366186835968
+    m_Key: Lvl2.Razzle.Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652393462394880
+    m_Key: Lvl2.Blue.Quest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652823500189696
+    m_Key: Lvl2.Razzle.Grateful
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3652925887344640
+    m_Key: Lvl2.Blue.Agreed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
