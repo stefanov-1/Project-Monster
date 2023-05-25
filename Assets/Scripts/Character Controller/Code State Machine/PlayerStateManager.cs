@@ -23,6 +23,7 @@ public class PlayerStateManager : MonoBehaviour
     #region Properties
 
     public Rigidbody rb;
+    public Transform feet;
 
     public float horizontalDrag = 5f;
     public float runAcceleration = 5f;
@@ -37,7 +38,6 @@ public class PlayerStateManager : MonoBehaviour
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
     public bool isGrounded = false; //{ get; private set; }
-    [SerializeField] private LayerMask groundLayerMask;
     #endregion 
 
     private void Start()
@@ -69,9 +69,9 @@ public class PlayerStateManager : MonoBehaviour
         currentState.FixedUpdateState(this);
         
         //cast a ray downard from the bottom of the character collider to see if we are on the ground
-        Ray groundRay = new Ray(transform.position, Vector3.down * groundRayLength);
-        isGrounded = Physics.Raycast(groundRay, out groundRayCastResults, groundRayLength, ~groundLayerMask);
-        Debug.DrawRay(groundRay.origin, groundRay.direction, Color.red);
+        //Ray groundRay = new Ray(transform.position, Vector3.down * groundRayLength);
+        //isGrounded = Physics.Raycast(groundRay, out groundRayCastResults, groundRayLength, ~groundLayerMask);
+        isGrounded = Physics.OverlapSphere(feet.position, 0.4f, ~LayerMask.GetMask("Player")).Length > 0;
     }
 
     public void ChangeState(State newState)
