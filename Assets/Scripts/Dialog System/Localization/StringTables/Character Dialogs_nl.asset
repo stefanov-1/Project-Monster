@@ -44,6 +44,29 @@ MonoBehaviour:
       laat ik je door deze deur gaan!
     m_Metadata:
       m_Items: []
+  - m_Id: 3645238076239872
+    m_Localized: Hey daar ben je weer Blue! Dat duurde niet lang. Heb je de kers
+      gekregen?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645342854148096
+    m_Localized: Ja! Alsjeblieft!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645398088937472
+    m_Localized: Eindelijk! Heel erg bedankt, Blue, ik sta bij je in het krijt. Ik
+      hoop dat het niet te veel moeite was. Ik ga nu aan de kant, maar wees voorzichtig
+      daarbuiten!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645514455707648
+    m_Localized: Geen enkel probleem, ik help je graag!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645604725518336
+    m_Localized: Veel succes daarbuiten! Ik hoop dat je veilig terugkomt.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

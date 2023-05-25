@@ -35,6 +35,26 @@ MonoBehaviour:
     m_Key: Lvl1.Spike.Quest
     m_Metadata:
       m_Items: []
+  - m_Id: 3645238076239872
+    m_Key: Lvl1.Spike.Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645342854148096
+    m_Key: Lvl1.Blue.Return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645398088937472
+    m_Key: Lvl1.Spike.Thanks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645514455707648
+    m_Key: Lvl1.Blue.Welcome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645604725518336
+    m_Key: Lvl1.Spike.GoodLuck
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

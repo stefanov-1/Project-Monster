@@ -44,6 +44,28 @@ MonoBehaviour:
       you pass through this door no problem!
     m_Metadata:
       m_Items: []
+  - m_Id: 3645238076239872
+    m_Localized: Hey again, Blue! That didn't take you long at all. Did you get the
+      cherry?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645342854148096
+    m_Localized: Yep! Here you go!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645398088937472
+    m_Localized: Finally! Thank you so much, Blue, I owe you one. Hope it wasn't
+      too much trouble. I'll get out of your way now, but you be careful out there!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645514455707648
+    m_Localized: No problem at all, I'm happy to help!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3645604725518336
+    m_Localized: Good luck out there! Hope you make it back safe.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
