@@ -16,11 +16,19 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 9dfad45b424512a42b85798675b9521f
   m_Entries:
   - m_Id: 53992468480
-    m_Key: TestCharacter.Intro
+    m_Key: SpikeCharacter.Intro
     m_Metadata:
       m_Items: []
   - m_Id: 391057165758464
-    m_Key: MainCharacterTest.Greet
+    m_Key: BlueCharacter.Greet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3624986466578432
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3625164212793344
+    m_Key: New Entry 1
     m_Metadata:
       m_Items: []
   m_Metadata:

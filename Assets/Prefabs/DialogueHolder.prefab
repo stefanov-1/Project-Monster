@@ -503,8 +503,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakRange: 5
-  dialog: []
+  activateInRange: 1
+  dialog:
+  - identifier: 
+    sentences: []
+    OnDialogComplete:
+      m_PersistentCalls:
+        m_Calls: []
   currentDialogIndex: 0
+  speakCollider: {fileID: 0}
   dialogText: {fileID: 3590782567088123353}
   characterName: {fileID: 3590782566098840035}
   dialogCanvas: {fileID: 3590782566805443598}
