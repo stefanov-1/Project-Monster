@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlideSurface : MonoBehaviour
+public class ClimbSurface : Surface
 {
-    public Transform startPoint;
-    public Transform endPoint;
-    public Transform Collision;
-    
+    public ControlValues.ClimbOrientation climbOrientation;
+
     // Start is called before the first frame update
     void Start()
     {
