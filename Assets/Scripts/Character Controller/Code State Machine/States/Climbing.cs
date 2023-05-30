@@ -63,7 +63,7 @@ public class Climbing : State
     {
         player.rb.useGravity = true;
         
-        player.rb.AddForce(new Vector3(Mathf.Round(Input.GetAxis("Horizontal")), 0, 0) * player.climbExitJumpForce, ForceMode.Impulse);
+        player.rb.AddForce(new Vector3(Mathf.Ceil(Input.GetAxis("Horizontal")), 0, 0) * player.climbExitJumpForce, ForceMode.Impulse);
         
     }
 
