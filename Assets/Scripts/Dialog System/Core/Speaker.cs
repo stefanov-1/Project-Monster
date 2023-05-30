@@ -86,10 +86,10 @@ public class Speaker : MonoBehaviour
 
     private void Update()
     {
-        if(!isDialogActive && isWithinRange && Input.GetButtonDown("Interact"))
-        {
-            StartDialog();
-        }
+        // if(!isDialogActive && isWithinRange && Input.GetButtonDown("Interact"))
+        // {
+        //     StartDialog();
+        // }
         if (isDialogActive)
         {
             if (Input.anyKeyDown)
