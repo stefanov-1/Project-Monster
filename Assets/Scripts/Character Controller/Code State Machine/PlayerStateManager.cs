@@ -104,17 +104,25 @@ public class PlayerStateManager : MonoBehaviour
         GUI.Label(new Rect(10, 30, 300, 30), (Time.timeSinceLevelLoad - ControlValues.Instance.lastGroundedTime).ToString());
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "ClimbSurface" && rb.velocity.y <= 0)
+        {
+            ClimbSurface climbSurface = other.transform.parent.GetComponent<ClimbSurface>();
+            ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
+            ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
+            ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
+            
+            ChangeState(climbingState);
+        }
+    }
+
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
     {
         switch (other.tag)
         {
             case "ClimbSurface":
-                ClimbSurface climbSurface = other.transform.parent.GetComponent<ClimbSurface>();
-                ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
-                ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
-                ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
-            
-                ChangeState(climbingState);
+                //this was moved to OnTriggetrStay so the player can enter the climbing state again without leaving the area
                 break;
             
             case "SlideSurface":
