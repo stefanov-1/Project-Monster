@@ -34,6 +34,7 @@ public class PlayerStateManager : MonoBehaviour
     public float climbSpeed = 5f;
     public float slideSpeed = 10f;
     public float climbExitJumpForce = 3f;
+    public float slideExitLaunchForce = 3f;
     public float coyoteGraceTime = 0.1f;
     
     public RaycastHit groundRayCastResults;
