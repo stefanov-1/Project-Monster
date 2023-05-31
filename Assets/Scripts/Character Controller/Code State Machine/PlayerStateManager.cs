@@ -136,6 +136,7 @@ public class PlayerStateManager : MonoBehaviour
                 ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
                 ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
                 ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
+                ControlValues.Instance.currentSurfaceNormal = climbSurface.normal;
             
                 ChangeState(climbingState);
                 break;
@@ -145,7 +146,8 @@ public class PlayerStateManager : MonoBehaviour
                 ControlValues.Instance.currentSlideStart = slideSurface.startPoint.position;
                 ControlValues.Instance.currentSlideEnd = slideSurface.endPoint.position;
                 ControlValues.Instance.currentSlideDirection = (slideSurface.endPoint.position - slideSurface.startPoint.position).normalized;
-            
+                ControlValues.Instance.currentSurfaceNormal = slideSurface.normal;
+                
                 ChangeState(slideState);
                 break;
             
