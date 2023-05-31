@@ -44,6 +44,9 @@ public class Sliding : State
     public override void ExitState(PlayerStateManager player)
     {
         player.rb.useGravity = true;
+
+        Vector3 horizontalDirection = new Vector3(Mathf.Ceil(ControlValues.Instance.currentSlideDirection.x), 0, 0);
+        player.rb.AddForce(horizontalDirection * player.slideExitLaunchForce, ForceMode.Impulse);
     }
     
     
