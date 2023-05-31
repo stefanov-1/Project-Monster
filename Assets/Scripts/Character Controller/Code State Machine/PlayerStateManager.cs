@@ -39,7 +39,7 @@ public class PlayerStateManager : MonoBehaviour
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
     public bool isGrounded = false; //{ get; private set; }
-    #endregion 
+    #endregion
 
     private void Start()
     {
@@ -85,6 +85,11 @@ public class PlayerStateManager : MonoBehaviour
         currentState = newState;
     }
 
+    public void UpdateMeshRotation()
+    {
+        
+    }
+    
     public void ApplyDrag()
     {
         rb.velocity = new Vector3(Mathf.Lerp(rb.velocity.x, 0, horizontalDrag * Time.deltaTime), rb.velocity.y, 0);
