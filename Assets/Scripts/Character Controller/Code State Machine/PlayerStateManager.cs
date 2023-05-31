@@ -106,9 +106,13 @@ public class PlayerStateManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "ClimbSurface" && rb.velocity.y <= 0)
+        //this has to be here too so you can enter the climbing state without leaving the area
+        if (other.tag == "ClimbSurface" && rb.velocity.y <= 0 && currentState != climbingState)
         {
             ClimbSurface climbSurface = other.transform.parent.GetComponent<ClimbSurface>();
+            
+            if (climbSurface.climbOrientation == ControlValues.ClimbOrientation.LeftRight) return;
+            
             ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
             ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
             ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
@@ -122,7 +126,12 @@ public class PlayerStateManager : MonoBehaviour
         switch (other.tag)
         {
             case "ClimbSurface":
-                //this was moved to OnTriggetrStay so the player can enter the climbing state again without leaving the area
+                ClimbSurface climbSurface = other.transform.parent.GetComponent<ClimbSurface>();
+                ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
+                ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
+                ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
+            
+                ChangeState(climbingState);
                 break;
             
             case "SlideSurface":
