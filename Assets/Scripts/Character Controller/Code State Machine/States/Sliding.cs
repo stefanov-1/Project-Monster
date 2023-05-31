@@ -45,7 +45,7 @@ public class Sliding : State
     {
         player.rb.useGravity = true;
 
-        Vector3 horizontalDirection = new Vector3(Mathf.Ceil(ControlValues.Instance.currentSlideDirection.x), 0, 0);
+        Vector3 horizontalDirection = new Vector3(Mathf.Round(ControlValues.Instance.currentSlideDirection.x), 0, 0);
         player.rb.AddForce(horizontalDirection * player.slideExitLaunchForce, ForceMode.Impulse);
     }
     
