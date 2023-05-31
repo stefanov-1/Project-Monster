@@ -24,6 +24,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public Rigidbody rb;
     public Transform feet;
+    public Transform mesh;
 
     public float horizontalDrag = 5f;
     public float runAcceleration = 5f;
@@ -51,7 +52,6 @@ public class PlayerStateManager : MonoBehaviour
     
     private void OnEnable()
     {
-
         currentState = idleState;
         currentState.EnterState(this);
         previousState = currentState;
@@ -62,8 +62,8 @@ public class PlayerStateManager : MonoBehaviour
         currentState.UpdateState(this);
         //hardcoded limitations because unity is stupid
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        Vector3 eulerRotation = transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(0, eulerRotation.y, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        UpdateMeshRotation();
     }
 
     private void FixedUpdate()
