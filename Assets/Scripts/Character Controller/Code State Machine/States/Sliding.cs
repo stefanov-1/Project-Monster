@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonsterInput;
 
 public class Sliding : State
 {
@@ -41,6 +42,11 @@ public class Sliding : State
         player.rb.position = closetsPoint; // snap the player to the clmbable surface
 
         player.rb.useGravity = false;
+
+        this.player = player;
+        InputEvents.Move += OnMove;
+        InputEvents.InteractButton += OnInteract;
+        InputEvents.JumpButton += OnJump;
     }
 
     public override void ExitState(PlayerStateManager player)
@@ -49,6 +55,10 @@ public class Sliding : State
 
         Vector3 horizontalDirection = new Vector3(Mathf.Round(ControlValues.Instance.currentSlideDirection.x), 0, 0);
         player.rb.AddForce(horizontalDirection * player.slideExitLaunchForce, ForceMode.Impulse);
+
+        InputEvents.Move -= OnMove;
+        InputEvents.InteractButton -= OnInteract;
+        InputEvents.JumpButton -= OnJump;
     }
     
     private void OnMove(object sender, InputAction.CallbackContext context) { }
