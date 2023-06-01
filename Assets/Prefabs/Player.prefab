@@ -153,7 +153,7 @@ MonoBehaviour:
   runAcceleration: 200
   runMaxSpeed: 7
   airAcceleration: 50
-  airMaxSpeed: 3
+  airMaxSpeed: 7
   jumpForce: 20
   climbSpeed: 7
   slideSpeed: 12
@@ -162,6 +162,9 @@ MonoBehaviour:
   coyoteGraceTime: 0.1
   groundRayLength: 1.5
   isGrounded: 1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &9091859297822107739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ad6697792232b43b16cac8a26197d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 9091859297822107739}
 --- !u!114 &9091859297822107742
 MonoBehaviour:
   m_ObjectHideFlags: 0
