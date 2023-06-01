@@ -39,6 +39,8 @@ public class Sliding : State
         player.rb.position = closetsPoint; // snap the player to the clmbable surface
 
         player.rb.useGravity = false;
+        
+        ControlValues.Instance.targetMeshRotation = Quaternion.LookRotation(ControlValues.Instance.currentSlideDirection, ControlValues.Instance.currentSurfaceNormal);
     }
 
     public override void ExitState(PlayerStateManager player)

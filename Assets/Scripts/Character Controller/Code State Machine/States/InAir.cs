@@ -19,6 +19,11 @@ public class InAir : State
             return;
         }
         
+        if (player.rb.velocity.x > 0)
+            ControlValues.Instance.targetMeshRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
+        else
+            ControlValues.Instance.targetMeshRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
+        
         InAirMovement(player);
     }
 

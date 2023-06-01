@@ -37,6 +37,7 @@ public class PlayerStateManager : MonoBehaviour
     public float climbExitJumpForce = 3f;
     public float slideExitLaunchForce = 3f;
     public float coyoteGraceTime = 0.1f;
+    public float meshRotationSpeed = 0.1f;
     
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
@@ -62,7 +63,7 @@ public class PlayerStateManager : MonoBehaviour
         currentState.UpdateState(this);
         //hardcoded limitations because unity is stupid
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.Euler(0, -90, 0);
         UpdateMeshRotation();
     }
 
@@ -88,7 +89,10 @@ public class PlayerStateManager : MonoBehaviour
 
     public void UpdateMeshRotation()
     {
-        
+        mesh.rotation = Quaternion.Lerp(
+            mesh.rotation, 
+            ControlValues.Instance.targetMeshRotation, 
+            meshRotationSpeed * Time.deltaTime);
     }
     
     public void ApplyDrag()

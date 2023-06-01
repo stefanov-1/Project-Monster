@@ -2,6 +2,7 @@
 using Unity;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +20,6 @@ public class Running : State
         if ((acceleration > 0  && player.rb.velocity.x < player.runMaxSpeed) || 
             (acceleration < 0 && player.rb.velocity.x > -player.runMaxSpeed))
             player.rb.velocity += new Vector3(acceleration, 0, 0);
-
         
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -31,6 +31,11 @@ public class Running : State
             player.ChangeState(player.inAirState);
             return;
         }
+        
+        if (player.rb.velocity.x > 0)
+            ControlValues.Instance.targetMeshRotation = Quaternion.LookRotation(Vector3.right, Vector3.up);
+        else
+            ControlValues.Instance.targetMeshRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
         
         player.ApplyDrag();
     }

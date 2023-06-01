@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 9091859297822107741}
   feet: {fileID: 9128862613470445196}
+  mesh: {fileID: 8438528061664255378}
   horizontalDrag: 5
   runAcceleration: 200
   runMaxSpeed: 7
@@ -190,7 +191,9 @@ MonoBehaviour:
   climbSpeed: 5
   slideSpeed: 10
   climbExitJumpForce: 3
+  slideExitLaunchForce: 3
   coyoteGraceTime: 0.1
+  meshRotationSpeed: 10
   groundRayLength: 1.5
   isGrounded: 1
 --- !u!114 &9091859297822107739
@@ -318,8 +321,10 @@ MonoBehaviour:
   currentSlideEnd: {x: 0, y: 0, z: 0}
   currentSlideDirection: {x: 0, y: 0, z: 0}
   lastCheckpoint: {x: 0, y: 0, z: 0}
+  currentSurfaceNormal: {x: 0, y: 0, z: 0}
   checkpointBacklog: []
   lastGroundedTime: 0
+  targetMeshRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &1067457391987527242
 PrefabInstance:
   m_ObjectHideFlags: 0
