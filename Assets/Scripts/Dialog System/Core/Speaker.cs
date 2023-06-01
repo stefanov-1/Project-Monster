@@ -86,7 +86,7 @@ public class Speaker : MonoBehaviour
 
     private void Update()
     {
-        if(!isDialogActive && isWithinRange && Input.GetButtonDown("Interact"))
+        if(!isDialogActive && isWithinRange && Input.GetKeyDown(KeyCode.F))
         {
             StartDialog();
         }
@@ -119,13 +119,6 @@ public class Speaker : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 30), "Test Dialogue"))
-        {
-            StartDialog();
-        }
-    }
 
     public void SetDialogIndex(int index)
     {

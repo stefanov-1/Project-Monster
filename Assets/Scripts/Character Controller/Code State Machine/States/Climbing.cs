@@ -2,21 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Climbing : State
 {
+    PlayerStateManager player;
     public override void UpdateState(PlayerStateManager player)
     {
         player.rb.velocity = Vector3.zero;
         
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            player.ChangeState(player.jumpingState);
-            return;
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     player.ChangeState(player.jumpingState);
+        //     return;
+        // }
 
         float input = ControlValues.Instance.currentClimbOrientation == ControlValues.ClimbOrientation.LeftRight 
-            ? Input.GetAxis("Horizontal") : Input.GetAxis("Vertical");
+            ? player.moveInput.x : player.moveInput.y;
 
         Vector3 climbDirection = ControlValues.Instance.currentClimbEnd - ControlValues.Instance.currentClimbStart;
         climbDirection.Normalize();
@@ -47,6 +49,7 @@ public class Climbing : State
     
     public override void EnterState(PlayerStateManager player)
     {
+        this.player = player;
         player.rb.velocity = Vector3.zero;
 
         Vector3 closetsPoint = Utils.ClosestPointOnLineSegment(
@@ -57,14 +60,37 @@ public class Climbing : State
         player.rb.position = closetsPoint; // snap the player to the clmbable surface
 
         player.rb.useGravity = false;
+
+        PlayerStateManager.Move += OnMove;
+        PlayerStateManager.InteractButton += OnInteract;
+        PlayerStateManager.JumpButton += OnJump;
     }
 
     public override void ExitState(PlayerStateManager player)
     {
         player.rb.useGravity = true;
         
-        player.rb.AddForce(new Vector3(Mathf.Round(Input.GetAxis("Horizontal")), 0, 0) * player.climbExitJumpForce, ForceMode.Impulse);
+        player.rb.AddForce(new Vector3(Mathf.Round(player.moveInput.x), 0, 0) * player.climbExitJumpForce, ForceMode.Impulse);
         
+        PlayerStateManager.Move -= OnMove;
+        PlayerStateManager.InteractButton -= OnInteract;
+        PlayerStateManager.JumpButton -= OnJump;
+    }
+
+    private void OnMove(object sender, InputAction.CallbackContext context) { }
+
+    private void OnJump(object sender, InputAction.CallbackContext context)
+    {
+        if (/*context.ReadValueAsButton() && */context.started)
+        {
+            Debug.Log("Jumping from climbing state");
+            player.ChangeState(player.jumpingState);
+            return;
+        }
+    }
+
+    private void OnInteract(object sender, InputAction.CallbackContext context)
+    {
     }
 
 }

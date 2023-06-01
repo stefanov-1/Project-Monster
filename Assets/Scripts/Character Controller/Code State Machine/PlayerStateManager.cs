@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -33,12 +35,18 @@ public class PlayerStateManager : MonoBehaviour
     public float climbSpeed = 5f;
     public float slideSpeed = 10f;
     public float climbExitJumpForce = 3f;
-    
+
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
-    public bool isGrounded = false; //{ get; private set; }
+    public bool isGrounded = false;
     [SerializeField] private LayerMask groundLayerMask;
+
+    public Vector2 moveInput { get; private set; }
     #endregion 
+
+    public static EventHandler<InputAction.CallbackContext> JumpButton;
+    public static EventHandler<InputAction.CallbackContext> InteractButton;
+    public static EventHandler<InputAction.CallbackContext> Move;
 
     private void Start()
     {
@@ -46,7 +54,7 @@ public class PlayerStateManager : MonoBehaviour
         ControlValues.Instance.lastCheckpoint = transform.position;
         ControlValues.Instance.checkpointBacklog.Add(transform.position);
     }
-    
+
     private void OnEnable()
     {
 
@@ -67,7 +75,7 @@ public class PlayerStateManager : MonoBehaviour
     private void FixedUpdate()
     {
         currentState.FixedUpdateState(this);
-        
+
         //cast a ray downard from the bottom of the character collider to see if we are on the ground
         Ray groundRay = new Ray(transform.position, Vector3.down * groundRayLength);
         isGrounded = Physics.Raycast(groundRay, out groundRayCastResults, groundRayLength, ~groundLayerMask);
@@ -93,11 +101,11 @@ public class PlayerStateManager : MonoBehaviour
         rb.position = ControlValues.Instance.lastCheckpoint;
         ChangeState(idleState);
     }
-    
+
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 200, 30), "Current State: " + currentState.ToString());
-        GUI.Label(new Rect(10, 20, 200, 30), "Current Velocity: " + rb.velocity.ToString());
+        GUI.Label(new Rect(10, 10, 256, 30), "Current State: " + currentState.ToString());
+        GUI.Label(new Rect(10, 20, 256, 30), "Current Velocity: " + rb.velocity.ToString());
     }
 
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
@@ -109,23 +117,23 @@ public class PlayerStateManager : MonoBehaviour
                 ControlValues.Instance.currentClimbStart = climbSurface.startPoint.position;
                 ControlValues.Instance.currentClimbEnd = climbSurface.endPoint.position;
                 ControlValues.Instance.currentClimbOrientation = climbSurface.climbOrientation;
-            
+
                 ChangeState(climbingState);
                 break;
-            
+
             case "SlideSurface":
                 SlideSurface slideSurface = other.transform.parent.GetComponent<SlideSurface>();
                 ControlValues.Instance.currentSlideStart = slideSurface.startPoint.position;
                 ControlValues.Instance.currentSlideEnd = slideSurface.endPoint.position;
                 ControlValues.Instance.currentSlideDirection = (slideSurface.endPoint.position - slideSurface.startPoint.position).normalized;
-            
+
                 ChangeState(slideState);
                 break;
-            
+
             case "DeathSurface":
                 Respawn();
                 break;
-            
+
             case "Checkpoint":
                 if (!ControlValues.Instance.checkpointBacklog.Contains(other.transform.position))
                 {
@@ -133,10 +141,28 @@ public class PlayerStateManager : MonoBehaviour
                     ControlValues.Instance.checkpointBacklog.Add(other.transform.position);
                 }
                 break;
-            
+
             default:
                 break;
         }
-        
+
     }
+
+    #region Input Actions
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        JumpButton?.Invoke(this, context);
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        InteractButton?.Invoke(this, context);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Move?.Invoke(this, context);
+        moveInput = context.ReadValue<Vector2>();
+    }
+    #endregion
 }
