@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonsterInput;
 
 public class Running : State
 {
@@ -43,16 +44,17 @@ public class Running : State
     public override void EnterState(PlayerStateManager player)
     {
         this.player = player;
-        PlayerStateManager.Move += OnMove;
-        PlayerStateManager.InteractButton += OnInteract;
-        PlayerStateManager.JumpButton += OnJump;
+        InputEvents.Move += OnMove;
+        InputEvents.InteractButton += OnInteract;
+        InputEvents.JumpButton += OnJump;
+        player.rb.velocity = new Vector3(0, player.rb.velocity.y, 0);
     }
 
     public override void ExitState(PlayerStateManager player)
     {
-        PlayerStateManager.Move -= OnMove;
-        PlayerStateManager.InteractButton -= OnInteract;
-        PlayerStateManager.JumpButton -= OnJump;
+        InputEvents.Move -= OnMove;
+        InputEvents.InteractButton -= OnInteract;
+        InputEvents.JumpButton -= OnJump;
     }
 
     private void OnMove(object sender, InputAction.CallbackContext context) { }
@@ -68,10 +70,5 @@ public class Running : State
 
     private void OnInteract(object sender, InputAction.CallbackContext context)
     {
-        if (context.ReadValueAsButton())
-        {
-            player.ChangeState(player.climbingState);
-            return;
-        }
     }
 }

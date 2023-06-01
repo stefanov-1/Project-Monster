@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using MonsterInput;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerStateManager : MonoBehaviour
     public InAir inAirState = new InAir();
     public Climbing climbingState = new Climbing();
     public Sliding slideState = new Sliding();
+    public Dialogue dialogueState = new Dialogue();
     #endregion
 
     #region Current and previous states
@@ -44,10 +46,6 @@ public class PlayerStateManager : MonoBehaviour
     public Vector2 moveInput { get; private set; }
     #endregion 
 
-    public static EventHandler<InputAction.CallbackContext> JumpButton;
-    public static EventHandler<InputAction.CallbackContext> InteractButton;
-    public static EventHandler<InputAction.CallbackContext> Move;
-
     private void Start()
     {
         //add current position as checkpoint at the start for testing
@@ -57,10 +55,15 @@ public class PlayerStateManager : MonoBehaviour
 
     private void OnEnable()
     {
-
         currentState = idleState;
         currentState.EnterState(this);
         previousState = currentState;
+
+        InputEvents.Move += OnMove;
+    }
+    private void OnDisable()
+    {
+        InputEvents.Move -= OnMove;
     }
     // Update is called once per frame
     void Update()
@@ -106,6 +109,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         GUI.Label(new Rect(10, 10, 256, 30), "Current State: " + currentState.ToString());
         GUI.Label(new Rect(10, 20, 256, 30), "Current Velocity: " + rb.velocity.ToString());
+        GUI.Label(new Rect(10, 50, 256, 30), "Current MoveInput: " + moveInput.ToString());
     }
 
     private void OnTriggerEnter(Collider other) // to implement it quickly I'm doing this here but there's probably a cleaner way
@@ -149,19 +153,8 @@ public class PlayerStateManager : MonoBehaviour
     }
 
     #region Input Actions
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnMove(object sender, InputAction.CallbackContext context)
     {
-        JumpButton?.Invoke(this, context);
-    }
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        InteractButton?.Invoke(this, context);
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        Move?.Invoke(this, context);
         moveInput = context.ReadValue<Vector2>();
     }
     #endregion

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonsterInput;
 
 public class Idle : State
 {
@@ -28,16 +29,16 @@ public class Idle : State
     public override void EnterState(PlayerStateManager player)
     {
         this.player = player;
-        PlayerStateManager.Move += OnMove;
-        PlayerStateManager.InteractButton += OnInteract;
-        PlayerStateManager.JumpButton += OnJump;
+        InputEvents.Move += OnMove;
+        InputEvents.InteractButton += OnInteract;
+        InputEvents.JumpButton += OnJump;
     }
 
     public override void ExitState(PlayerStateManager player)
     {
-        PlayerStateManager.Move -= OnMove;
-        PlayerStateManager.InteractButton -= OnInteract;
-        PlayerStateManager.JumpButton -= OnJump;
+        InputEvents.Move -= OnMove;
+        InputEvents.InteractButton -= OnInteract;
+        InputEvents.JumpButton -= OnJump;
     }
 
     private void OnMove(object sender, InputAction.CallbackContext context) { }

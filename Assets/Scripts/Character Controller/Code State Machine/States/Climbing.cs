@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MonsterInput;
 
 public class Climbing : State
 {
@@ -61,9 +62,9 @@ public class Climbing : State
 
         player.rb.useGravity = false;
 
-        PlayerStateManager.Move += OnMove;
-        PlayerStateManager.InteractButton += OnInteract;
-        PlayerStateManager.JumpButton += OnJump;
+        InputEvents.Move += OnMove;
+        InputEvents.InteractButton += OnInteract;
+        InputEvents.JumpButton += OnJump;
     }
 
     public override void ExitState(PlayerStateManager player)
@@ -72,16 +73,16 @@ public class Climbing : State
         
         player.rb.AddForce(new Vector3(Mathf.Round(player.moveInput.x), 0, 0) * player.climbExitJumpForce, ForceMode.Impulse);
         
-        PlayerStateManager.Move -= OnMove;
-        PlayerStateManager.InteractButton -= OnInteract;
-        PlayerStateManager.JumpButton -= OnJump;
+        InputEvents.Move -= OnMove;
+        InputEvents.InteractButton -= OnInteract;
+        InputEvents.JumpButton -= OnJump;
     }
 
     private void OnMove(object sender, InputAction.CallbackContext context) { }
 
     private void OnJump(object sender, InputAction.CallbackContext context)
     {
-        if (/*context.ReadValueAsButton() && */context.started)
+        if (context.started)
         {
             Debug.Log("Jumping from climbing state");
             player.ChangeState(player.jumpingState);

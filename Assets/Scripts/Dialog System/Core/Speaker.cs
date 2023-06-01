@@ -8,6 +8,7 @@ using TMPro;
 
 public class Speaker : MonoBehaviour
 {
+    private PlayerStateManager player;
     public float speakRange = 5f;
     [SerializeField] private bool activateInRange = true;
     public List<Dialog> dialog;
@@ -75,6 +76,8 @@ public class Speaker : MonoBehaviour
         {
             StartDialog();
             isWithinRange = true;
+            player = other.GetComponent<PlayerStateManager>();
+            player.ChangeState(player.dialogueState);
         }
     }
     private void OnTriggerExit(Collider other) {
@@ -110,6 +113,7 @@ public class Speaker : MonoBehaviour
                     currentSentenceIndex = 0;
                     isDialogActive = false;
                     isSpeaking = false;
+                    player.ChangeState(player.idleState);
                 }
                 else
                 {
