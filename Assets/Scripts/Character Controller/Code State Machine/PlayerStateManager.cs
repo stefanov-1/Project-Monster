@@ -45,7 +45,6 @@ public class PlayerStateManager : MonoBehaviour
     public RaycastHit groundRayCastResults;
     [SerializeField] private float groundRayLength = 1.5f;
     public bool isGrounded = false; //{ get; private set; }
-    public bool isGrounded = false;
     [SerializeField] private LayerMask groundLayerMask;
 
     public Vector2 moveInput { get; private set; }
