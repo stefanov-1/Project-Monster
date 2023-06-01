@@ -155,8 +155,8 @@ MonoBehaviour:
   airMaxSpeed: 3
   jumpForce: 20
   climbSpeed: 7
-  slideSpeed: 15
-  climbExitJumpForce: 10
+  slideSpeed: 12
+  climbExitJumpForce: 8
   slideExitLaunchForce: 10
   coyoteGraceTime: 0.1
   groundRayLength: 1.5
