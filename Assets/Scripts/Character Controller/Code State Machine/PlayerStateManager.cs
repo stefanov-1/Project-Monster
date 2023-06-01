@@ -63,7 +63,7 @@ public class PlayerStateManager : MonoBehaviour
         currentState.UpdateState(this);
         //hardcoded limitations because unity is stupid
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        transform.rotation = Quaternion.Euler(0, -90, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         UpdateMeshRotation();
     }
 
@@ -89,8 +89,8 @@ public class PlayerStateManager : MonoBehaviour
 
     public void UpdateMeshRotation()
     {
-        mesh.rotation = Quaternion.Lerp(
-            mesh.rotation, 
+        mesh.localRotation = Quaternion.Lerp(
+            mesh.localRotation, 
             ControlValues.Instance.targetMeshRotation, 
             meshRotationSpeed * Time.deltaTime);
     }
