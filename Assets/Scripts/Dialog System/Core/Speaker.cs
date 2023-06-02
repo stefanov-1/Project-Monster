@@ -146,16 +146,6 @@ public class Speaker : MonoBehaviour
         }
     }
 
-    // private void OnDrawGizmos() {
-    //     if(dialogHitboxType == DialogHitboxType.Sphere){
-    //         Gizmos.color = Color.blue;
-    //         Gizmos.DrawWireSphere(transform.position, speakRange);
-    //     }
-    //     else if(dialogHitboxType == DialogHitboxType.Box){
-    //         Gizmos.color = Color.blue;
-    //         Gizmos.DrawWireCube(transform.position + boxPosition, boxSize*1.1f);
-    //     }
-    // }
 
     public void SetColliders(){
         if(dialogHitboxType == DialogHitboxType.Sphere){
@@ -184,5 +174,14 @@ public class Speaker : MonoBehaviour
         else if(dialogHitboxType == DialogHitboxType.Box){
             DestroyImmediate(boxCollider);
         }
+    }
+
+    [ContextMenu("Lock Transform")]
+    public void LockTransform(){
+        gameObject.transform.hideFlags = HideFlags.NotEditable;
+    }
+    [ContextMenu("Unlock Transform")]
+    public void UnlockTransform(){
+        gameObject.transform.hideFlags = HideFlags.None;
     }
 }

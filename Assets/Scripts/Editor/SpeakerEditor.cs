@@ -21,6 +21,16 @@ public class SpeakerEditor : Editor
         boxPosition = speaker.boxPosition;
         speakerCollisionType = speaker.dialogHitboxType;
 
+        // speaker.gameObject.transform.hideFlags = HideFlags.HideInInspector;
+
+        Tools.hidden = true;
+        Undo.undoRedoPerformed += OnUndoRedo;
+    }
+
+    private void OnDisable()
+    {
+        Tools.hidden = false;
+        Undo.undoRedoPerformed -= OnUndoRedo;
     }
 
     public override void OnInspectorGUI()
@@ -71,27 +81,33 @@ public class SpeakerEditor : Editor
             case Speaker.DialogHitboxType.Box:
 
                 //create handles to move the cube around and update the variables accordingly
-                EditorGUI.BeginChangeCheck();
-                Vector3 newBoxPosition = Handles.PositionHandle(speaker.transform.position + boxPosition, Quaternion.identity);
-                if (EditorGUI.EndChangeCheck())
+                if (Tools.current == Tool.Move)
                 {
-                    Undo.RecordObject(speaker, "changed box position");
-                    EditorUtility.SetDirty(speaker);
-                    boxPosition = newBoxPosition - speaker.transform.position;
-                    // boxPosition = speaker.transform.InverseTransformVector(newBoxPosition - speaker.transform.position);
-                    Debug.Log(boxPosition);
-                    speaker.boxPosition = boxPosition;
+                    EditorGUI.BeginChangeCheck();
+                    Vector3 newBoxPosition = Handles.PositionHandle(speaker.transform.position + boxPosition, Quaternion.identity);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        Undo.RecordObject(speaker, "changed box position");
+                        boxPosition = newBoxPosition - speaker.transform.position;
+                        // boxPosition = speaker.transform.InverseTransformVector(newBoxPosition - speaker.transform.position);
+                        Debug.Log(boxPosition);
+                        speaker.boxPosition = boxPosition;
+                        EditorUtility.SetDirty(speaker);
+                    }
                 }
-                EditorGUI.BeginChangeCheck();
-                Vector3 newBoxSize = Handles.ScaleHandle(boxSize, speaker.transform.position + boxPosition, Quaternion.identity);
-                if (EditorGUI.EndChangeCheck())
+                if (Tools.current == Tool.Scale)
                 {
-                    Undo.RecordObject(speaker, "changed box size");
-                    EditorUtility.SetDirty(speaker);
-                    boxSize = newBoxSize;
-                    //transform the box size to world space
-                    boxSize = newBoxSize;
-                    speaker.boxSize = boxSize;
+                    EditorGUI.BeginChangeCheck();
+                    Vector3 newBoxSize = Handles.ScaleHandle(boxSize, speaker.transform.position + boxPosition, Quaternion.identity);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        Undo.RecordObject(speaker, "changed box size");
+                        boxSize = newBoxSize;
+                        //transform the box size to world space
+                        boxSize = newBoxSize;
+                        speaker.boxSize = boxSize;
+                        EditorUtility.SetDirty(speaker);
+                    }
                 }
                 //draw the box
                 Handles.color = Color.green;
@@ -107,7 +123,8 @@ public class SpeakerEditor : Editor
         }
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         if (speaker is null) return;
         switch (speakerCollisionType)
         {
@@ -123,4 +140,21 @@ public class SpeakerEditor : Editor
             default: break;
         }
     }
+
+    private void OnUndoRedo()
+    {
+        Debug.Log("Undo/Redo");
+        speakRange = speaker.speakRange;
+        speakerCollisionType = speaker.dialogHitboxType;
+        boxSize = speaker.transform.InverseTransformDirection(speaker.boxSize);
+        boxPosition = speaker.boxPosition;
+        speakerCollisionType = speaker.dialogHitboxType;
+
+        // speaker.boxSize = boxSize;
+        // speaker.boxPosition = boxPosition;
+        // speaker.speakRange = speakRange;
+        // speaker.dialogHitboxType = speakerCollisionType;
+        // speaker.speakRange = speakRange;
+    }
+
 }
