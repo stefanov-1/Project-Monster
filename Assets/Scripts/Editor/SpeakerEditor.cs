@@ -17,7 +17,7 @@ public class SpeakerEditor : Editor
         speaker = (Speaker)target;
         speakRange = speaker.speakRange;
         speakerCollisionType = speaker.dialogHitboxType;
-        boxSize = speaker.boxSize;
+        boxSize = speaker.transform.InverseTransformDirection(speaker.boxSize);
         boxPosition = speaker.boxPosition;
         speakerCollisionType = speaker.dialogHitboxType;
 
@@ -90,7 +90,7 @@ public class SpeakerEditor : Editor
                     EditorUtility.SetDirty(speaker);
                     boxSize = newBoxSize;
                     //transform the box size to world space
-                    boxSize = speaker.transform.TransformDirection(newBoxSize);
+                    boxSize = newBoxSize;
                     speaker.boxSize = boxSize;
                 }
                 //draw the box
@@ -100,6 +100,24 @@ public class SpeakerEditor : Editor
             case Speaker.DialogHitboxType.Sphere:
                 Handles.color = Color.green;
                 Handles.DrawWireDisc(speaker.transform.position, Camera.current ? Camera.current.transform.forward : Vector3.up, speakRange);
+                Handles.DrawGizmos(Camera.current);
+                break;
+
+            default: break;
+        }
+    }
+
+    private void OnDrawGizmos() {
+        if (speaker is null) return;
+        switch (speakerCollisionType)
+        {
+            case Speaker.DialogHitboxType.Box:
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireCube(speaker.transform.position + boxPosition, boxSize);
+                break;
+            case Speaker.DialogHitboxType.Sphere:
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(speaker.transform.position, speakRange);
                 break;
 
             default: break;

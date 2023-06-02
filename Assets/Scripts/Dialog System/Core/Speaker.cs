@@ -32,6 +32,7 @@ public class Speaker : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     [HideInInspector] public Vector3 boxSize = new Vector3(1, 1, 1);
     [HideInInspector] public Vector3 boxPosition = new Vector3(0, 0, 0);
+    [HideInInspector] public Transform boxTransform;
 
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private TextMeshProUGUI characterName;
@@ -145,22 +146,22 @@ public class Speaker : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos() {
-        if(dialogHitboxType == DialogHitboxType.Sphere){
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, speakRange);
-        }
-        else if(dialogHitboxType == DialogHitboxType.Box){
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(transform.position + boxPosition, boxSize*1.1f);
-        }
-    }
+    // private void OnDrawGizmos() {
+    //     if(dialogHitboxType == DialogHitboxType.Sphere){
+    //         Gizmos.color = Color.blue;
+    //         Gizmos.DrawWireSphere(transform.position, speakRange);
+    //     }
+    //     else if(dialogHitboxType == DialogHitboxType.Box){
+    //         Gizmos.color = Color.blue;
+    //         Gizmos.DrawWireCube(transform.position + boxPosition, boxSize*1.1f);
+    //     }
+    // }
 
     public void SetColliders(){
         if(dialogHitboxType == DialogHitboxType.Sphere){
             speakCollider = gameObject.AddComponent<SphereCollider>();
             speakCollider.enabled = true;
-            speakCollider.radius = speakRange/2;
+            speakCollider.radius = speakRange * 0.325f;
             speakCollider.transform.InverseTransformPoint(transform.position);
             speakCollider.transform.position = transform.position;
             speakCollider.isTrigger = true;
@@ -169,8 +170,19 @@ public class Speaker : MonoBehaviour
             boxCollider = gameObject.AddComponent<BoxCollider>();
             boxCollider.enabled = true;
             boxCollider.isTrigger = true;
-            boxCollider.size = boxCollider.transform.InverseTransformDirection(boxSize);//boxSize;
-            boxCollider.center = boxPosition;
+            // boxCollider.size = boxCollider.transform.InverseTransformDirection(boxSize);//boxSize;
+            // boxCollider.transform.localScale = boxSize;
+            boxCollider.size = boxSize / 3;
+            boxCollider.center = boxPosition / 3;
+        }
+    }
+
+    public void RemoveColliders(){
+        if(dialogHitboxType == DialogHitboxType.Sphere){
+            DestroyImmediate(speakCollider);
+        }
+        else if(dialogHitboxType == DialogHitboxType.Box){
+            DestroyImmediate(boxCollider);
         }
     }
 }
